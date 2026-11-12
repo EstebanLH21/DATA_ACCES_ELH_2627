@@ -1,72 +1,86 @@
 package com.dataaccess.finalactivity.ELH2627;
+
 import java.sql.Connection;
 
 public class FlightsApp {
     public static void main(String[] args) {
-        try(Connection conn = DatabaseManager.getConnection()){
-            if(args.length == 0){
-                printHelp();
-                return;
-            }
-            String command = args[0];
-            switch (command) {
-                case "-h":
-                case "--help":
-                    printHelp();
-                    break;
 
-                case "-a":
-                case "--add":
-                    if (args.length == 2) {
-                        System.out.println("Comando --add detectado con archivo: " + args[1]);
-                    } else {
-                        printHelp();
-                    }
-                    break;
+        try (Connection conn = DatabaseManager.getConnection()) {
 
-                case "-f":
-                case "--flights":
-                    if (args.length == 4) {
-                        System.out.println("Comando --flights detectado");
-                    } else {
-                        printHelp();
-                    }
-                    break;
-
-                case "-o":
-                case "--origins":
-
-                    System.out.println("Comando --origins detectado");
-                    break;
-
-                case "-d":
-                case "--destinations":
-                    if (args.length == 2) {
-                        System.out.println("Comando --destinations detectado desde: " + args[1]);
-                    } else {
-                        printHelp();
-                    }
-                    break;
-
-                case "-b":
-                case "--buy":
-                    if (args.length == 4) {
-                        System.out.println("Comando --buy detectado");
-                    } else {
-                        printHelp();
-                    }
-                    break;
-
-                default:
-                    // Si el comando no se reconoce, mostramos la ayuda
-                    printHelp();
-            }
-        }catch(Exception e){
-            System.err.println(e);
+        } catch (Exception e) {
+            System.err.println("ERROR: The database service is not available.");
+            System.err.println("EXACT REASON: " + e.getMessage()); // Añade esta línea
+            e.printStackTrace();                                   // Añade esta línea
             System.exit(1);
         }
 
+        // 2. If no arguments, show help
+        if (args.length == 0) {
+            printHelp();
+            return;
+        }
+
+
+        String command = args[0];
+
+
+        switch (command) {
+            case "-h":
+            case "--help":
+                printHelp();
+                break;
+
+            case "-a":
+            case "--add":
+                if (args.length == 2) {
+
+                    XMLImporter.importPassengers(args[1]);
+                } else {
+                    printHelp();
+                }
+                break;
+
+            case "-f":
+            case "--flights":
+                if (args.length == 4) {
+                    // Call the flights manager (origin, destination, date)
+                    FlightsManager.showFlights(args[1], args[2], args[3]);
+                } else {
+                    printHelp();
+                }
+                break;
+
+            case "-o":
+            case "--origins":
+
+                FlightsManager.showOrigins();
+                break;
+
+            case "-d":
+            case "--destinations":
+                if (args.length == 2) {
+
+                    FlightsManager.showDestinations(args[1]);
+                } else {
+                    printHelp();
+                }
+                break;
+
+            case "-b":
+            case "--buy":
+                if (args.length == 4) {
+                } else {
+                    printHelp();
+                }
+                break;
+
+            default:
+                
+                printHelp();
+        }
     }
+
+    // Method to print the help screen (Exactly as requested in the PDF)
     private static void printHelp() {
         System.out.println("Usage: flights [options]");
         System.out.println("Options:");

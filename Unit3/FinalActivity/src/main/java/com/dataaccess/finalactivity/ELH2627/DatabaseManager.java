@@ -9,7 +9,7 @@ import java.util.Properties;
 public class DatabaseManager {
     public static Connection getConnection() throws Exception{
         Properties props = new Properties();
-        try(FileInputStream input = new FileInputStream("src/main/resources/config.properties")){
+        try(FileInputStream input = new FileInputStream("src/main/resources/db.properties")){
             props.load(input);
 
 
