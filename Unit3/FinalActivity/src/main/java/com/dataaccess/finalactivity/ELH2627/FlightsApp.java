@@ -35,7 +35,7 @@ public class FlightsApp {
 
                 case "-o":
                 case "--origins":
-                    // Este comando no necesita argumentos extra
+
                     System.out.println("Comando --origins detectado");
                     break;
 
