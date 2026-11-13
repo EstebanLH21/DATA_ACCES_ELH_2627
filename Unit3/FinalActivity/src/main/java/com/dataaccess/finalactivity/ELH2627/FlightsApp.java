@@ -75,7 +75,7 @@ public class FlightsApp {
                 break;
 
             default:
-                
+
                 printHelp();
         }
     }
