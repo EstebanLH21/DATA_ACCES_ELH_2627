@@ -43,7 +43,7 @@ public class FlightsApp {
             case "-f":
             case "--flights":
                 if (args.length == 4) {
-                    // Call the flights manager (origin, destination, date)
+
                     FlightsManager.showFlights(args[1], args[2], args[3]);
                 } else {
                     printHelp();
@@ -69,6 +69,7 @@ public class FlightsApp {
             case "-b":
             case "--buy":
                 if (args.length == 4) {
+                    TicketsManager.buyTicket(args[1], args[2], args[3]);
                 } else {
                     printHelp();
                 }
@@ -80,7 +81,7 @@ public class FlightsApp {
         }
     }
 
-    // Method to print the help screen (Exactly as requested in the PDF)
+
     private static void printHelp() {
         System.out.println("Usage: flights [options]");
         System.out.println("Options:");

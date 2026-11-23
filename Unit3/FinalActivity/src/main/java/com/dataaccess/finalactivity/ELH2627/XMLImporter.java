@@ -10,6 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class XMLImporter {
     public static void importPassengers(String filename) {
@@ -77,4 +78,62 @@ public class XMLImporter {
             System.err.println("Database connection error: " + e.getMessage());
         }
     }
+
+    public static void showContactsOlderThan(int minAge) {
+
+        try {
+
+            DocumentBuilderFactory factory =
+                    DocumentBuilderFactory.newInstance();
+
+            DocumentBuilder loader =
+                    factory.newDocumentBuilder();
+
+            Document doc = loader.parse("contacts.xml");
+
+            doc.getDocumentElement().normalize();
+
+            NodeList nList = doc.getElementsByTagName("contact");
+
+            for (int i = 0; i < nList.getLength(); i++) {
+
+                Node nNode = nList.item(i);
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element elem = (Element) nNode;
+
+                    String id = elem.getAttribute("id");
+
+                    String name = elem.getElementsByTagName("name")
+                            .item(0).getTextContent();
+
+                    String lastname = elem.getElementsByTagName("surname")
+                            .item(0).getTextContent();
+
+                    int age = Integer.parseInt(
+                            elem.getElementsByTagName("age")
+                                    .item(0)
+                                    .getTextContent()
+                    );
+
+                    if (age > minAge) {
+
+                        System.out.println(
+                                "ID: " + id +
+                                        " | Name: " + name + " " + lastname +
+                                        " | Age: " + age
+                        );
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+
+            System.err.println(
+                    "Error reading XML: " + e.getMessage()
+            );
+        }
+    }
+
 }
