@@ -51,7 +51,7 @@ public class FlightsManager {
     }
 
     //--flights
-    public static void showFlights(String origins, String destinations, String dateStr) {
+   /* public static void showFlights(String origins, String destinations, String dateStr) {
         String sql = "{call get_flights_elh(?,?,?)}";
         try(Connection conn = DatabaseManager.getConnection();
         CallableStatement cstmt = conn.prepareCall(sql)){
@@ -67,6 +67,38 @@ public class FlightsManager {
                     String flightCode = rs.getString("flight_code");
                     int freeSeats = rs.getInt("free_seats");
                     System.out.println("- Flight: " + flightCode + " | Free Seats: " + freeSeats);
+
+
+                }
+                if(!found){
+                    System.out.println("No flights found for these criteria.");
+                }
+            }
+
+        }catch(Exception e){
+            System.err.println("Error retrieving flights: " + e.getMessage());
+        }
+
+    }
+
+    */
+    public static void showFlights(String origins, String destinations, String dateStr) {
+        String sql = "{call get_flights_elh(?,?,?)}";
+        try(Connection conn = DatabaseManager.getConnection();
+            CallableStatement cstmt = conn.prepareCall(sql)){
+            cstmt.setString(1, origins);
+            cstmt.setString(2, destinations);
+            cstmt.setDate(3, Date.valueOf(dateStr));
+
+            try (ResultSet rs = cstmt.executeQuery()) {
+                System.out.println("Flights from " + origins + " to " + destinations + " on " + dateStr + ":");
+                boolean found = false;
+                while (rs.next()) {
+                    found = true;
+                    String flightCode = rs.getString("flight_code");
+                    int totalSeatsPlane = rs.getInt("total_seats");
+                    int ticketsSold = rs.getInt("tickets_sold");
+                    System.out.println("- Flight: " + flightCode + " | Plane seats: " + totalSeatsPlane + " | Tickets sold: " + ticketsSold);
 
 
                 }

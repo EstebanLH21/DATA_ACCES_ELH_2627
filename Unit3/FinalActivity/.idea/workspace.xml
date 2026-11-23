@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f330d6e-9805-431a-b474-a51f5ea9cdfc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/get_flights_elh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Unit2/4.4.3 Activities/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Unit2/4.4.3 Activities/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dataaccess/finalactivity/ELH2627/FlightsApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dataaccess/finalactivity/ELH2627/FlightsApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dataaccess/finalactivity/ELH2627/FlightsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dataaccess/finalactivity/ELH2627/FlightsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dataaccess/finalactivity/ELH2627/TicketsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dataaccess/finalactivity/ELH2627/TicketsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dataaccess/finalactivity/ELH2627/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dataaccess/finalactivity/ELH2627/FlightsApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/dataaccess/finalactivity/ELH2627/FlightsApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dataaccess/finalactivity/ELH2627/FlightsManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/dataaccess/finalactivity/ELH2627/FlightsManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dataaccess/finalactivity/ELH2627/TicketsManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/dataaccess/finalactivity/ELH2627/TicketsManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dataaccess/finalactivity/ELH2627/XMLImporter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/dataaccess/finalactivity/ELH2627/XMLImporter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +32,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -116,7 +128,7 @@
       <workItem from="1795200359094" duration="17113000" />
       <workItem from="1795366872621" duration="11373000" />
       <workItem from="1795426991969" duration="2892000" />
-      <workItem from="1795453735921" duration="1078000" />
+      <workItem from="1795453735921" duration="7658000" />
     </task>
     <servers />
   </component>

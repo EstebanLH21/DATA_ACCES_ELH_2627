@@ -1,0 +1,57 @@
+CREATE OR REPLACE FUNCTION get_flights_elh(
+origin_iata VARCHAR,
+dest_iata VARCHAR,
+flight_date DATE
+
+)
+RETURNS TABLE (
+	flight_code VARCHAR,
+	free_seats INTEGER
+)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+	RETURN QUERY
+	SELECT f.flight_code,
+	planes.total_seats - COUNT(tickets.ticket_number)::integer AS free_seats
+	FROM flight f
+	INNER JOIN airports AS origin ON f.source = origen.code
+	INNER JOIN airports AS destino ON f.destination = destino.code
+	INNER JOIN planes ON f.plane = planes.plane_id
+	LEFT JOIN tickets ON tickets.flight_code = f.flight_code
+		AND tickets.date_of_travel = flight_date
+		AND tickets.date_of_cancellation IS NULL
+	WHERE origen.iata = origin_iata AND destino.iata = dest_iata
+	GROUP BY f.flight_code, planes.total_seats;
+	END;
+	$BODY$;
+
+	CREATE OR REPLACE FUNCTION get_flights_elh(
+    origin_iata VARCHAR,
+    dest_iata VARCHAR,
+    flight_date DATE
+
+    )
+    RETURNS TABLE (
+    	flight_code VARCHAR,
+    	total_seats INTEGER,
+    	tickets_sold INTEGER
+    )
+    LANGUAGE 'plpgsql'
+    AS $BODY$
+    BEGIN
+    	RETURN QUERY
+    	SELECT f.flight_code,
+    	planes.total_seats,
+    	COUNT(tickets.ticket_number)::integer AS tickets_sold
+    	FROM flight f
+    	INNER JOIN airports AS origin ON f.source = origen.code
+    	INNER JOIN airports AS destino ON f.destination = destino.code
+    	INNER JOIN planes ON f.plane = planes.plane_id
+    	LEFT JOIN tickets ON tickets.flight_code = f.flight_code
+    		AND tickets.date_of_travel = flight_date
+    		AND tickets.date_of_cancellation IS NULL
+    	WHERE origen.iata = origin_iata AND destino.iata = dest_iata
+    	GROUP BY f.flight_code, planes.total_seats;
+    	END;
+    	$BODY$;

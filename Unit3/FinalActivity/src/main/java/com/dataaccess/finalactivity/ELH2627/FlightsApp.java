@@ -69,7 +69,18 @@ public class FlightsApp {
             case "-b":
             case "--buy":
                 if (args.length == 4) {
-                    TicketsManager.buyTicket(args[1], args[2], args[3]);
+                    TicketsManager.buyTicket(args[1], args[2], args[3], false);
+                } else if (args.length == 5) {
+                    TicketsManager.buyTicket(args[1], args[2], args[3], true);
+                } else {
+                    printHelp();
+                }
+                break;
+            case "-c":
+            case "--cancel":
+                if (args.length == 2) {
+
+                    TicketsManager.cancelTicket(args[1], args[2]);
                 } else {
                     printHelp();
                 }
@@ -88,8 +99,9 @@ public class FlightsApp {
         System.out.println("  -h, --help: show this help");
         System.out.println("  -a, --add <filename.xml>: add the passengers in the XML file to the database.");
         System.out.println("  -f, --flights <origin> <destination> <date>: show the flights available from origin to destination");
-        System.out.println("  -b, --buy <customerId> <flightId> <date>: buy a ticket for a flight in a specific date");
+        System.out.println("  -b, --buy <customerId> <flightId> <date> [--print]: buy a ticket for a flight in a specific date (--print option is opcional)");
         System.out.println("  -o, --origins: show the origins of the flights");
         System.out.println("  -d, --destinations <origin>: show the destinations of the flights from origin");
+        System.out.println("  -c, --cancel <idPassenger> <date>");
     }
 }

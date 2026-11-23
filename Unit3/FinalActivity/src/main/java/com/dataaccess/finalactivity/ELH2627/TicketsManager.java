@@ -1,9 +1,16 @@
 package com.dataaccess.finalactivity.ELH2627;
+import javax.swing.text.Document;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.*;
 
 public class TicketsManager {
 
-    public static void buyTicket(String passport, String flightCode, String dateStr) {
+    public static void buyTicket(String passport, String flightCode, String dateStr, boolean print) {
 
         try (Connection conn = DatabaseManager.getConnection()) {
             conn.setAutoCommit(false);
@@ -64,8 +71,41 @@ public class TicketsManager {
                 }
 
 
+
                 conn.commit();
                 System.out.println("Ticket successfully bought for passenger " + passport + " on flight " + flightCode + " for date " + dateStr);
+                if(print) {
+                    String ticketNumSQL = "SELECT ticket_number FROM tickets WHERE passportno = ? AND date_of_travel = ? AND date_of_cancellation IS NULL";
+                    int ticketNum = 0;
+                    try(PreparedStatement ticketNumPstmt = conn.prepareStatement(ticketNumSQL)) {
+                        ticketNumPstmt.setString(1, passport);
+                        ticketNumPstmt.setDate(2, travelDate);
+                        try (ResultSet rs = ticketNumPstmt.executeQuery()) {
+                            if (rs.next()) {
+                                ticketNum = rs.getInt("ticket_number");
+
+                            }
+                        }
+
+
+                    }
+                    String fileName = "Ticket"+ticketNum+".txt";
+                    File file = new File(fileName);
+
+
+                    boolean append = true;
+
+
+                    try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, append)))) {
+
+                        pw.println("Passport: " + passport + " | Flight: " + flightCode + " | Date: " + dateStr);
+
+
+                        System.out.println("Saved!");
+                    }
+
+                }
+
 
             } catch (Exception e) {
 
@@ -74,6 +114,32 @@ public class TicketsManager {
             }
         } catch (Exception e) {
             System.err.println("Database connection error: " + e.getMessage());
+        }
+    }
+        public static void cancelTicket(String passport, String dateStri){
+        Date travelDate = Date.valueOf(dateStri);
+        Date cancelDate = new Date(System.currentTimeMillis());
+        String sql = "UPDATE tickets SET date_of_cancellation = ? WHERE passportno = ? AND date_of_travel = ?;";
+        try(Connection conn = DatabaseManager.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setDate(1, cancelDate);
+            pstmt.setString(2, passport);
+            pstmt.setDate(3, travelDate);
+
+            int rows = pstmt.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Ticket for passenger " + passport + " has been cancelled.");
+            }else{
+                System.out.println("Error at canceling ticket for passenger " + passport);
+            }
+
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
