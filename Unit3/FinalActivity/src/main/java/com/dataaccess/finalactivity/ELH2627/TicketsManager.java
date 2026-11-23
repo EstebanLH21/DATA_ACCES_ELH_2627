@@ -76,5 +76,5 @@ public class TicketsManager {
             System.err.println("Database connection error: " + e.getMessage());
         }
     }
-    
+
 }

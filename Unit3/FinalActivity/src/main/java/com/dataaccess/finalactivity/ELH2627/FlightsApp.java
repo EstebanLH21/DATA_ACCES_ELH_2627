@@ -9,8 +9,8 @@ public class FlightsApp {
 
         } catch (Exception e) {
             System.err.println("ERROR: The database service is not available.");
-            System.err.println("EXACT REASON: " + e.getMessage()); // Añade esta línea
-            e.printStackTrace();                                   // Añade esta línea
+            System.err.println("EXACT REASON: " + e.getMessage());
+            e.printStackTrace();
             System.exit(1);
         }
 
